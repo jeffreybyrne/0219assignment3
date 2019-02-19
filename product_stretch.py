@@ -13,8 +13,8 @@ class Product:
 
     #str function to describe the product itself
     def __str__(self):
-        return "The product is {}, it costs ${:.2f}, and has a tax rate of {}.".format(self.name,self.price,self.tax)
-        # return "{}".format(self.name)
+        # return "The product is {}, it costs ${:.2f}, and has a tax rate of {}.".format(self.name,self.price,self.tax)
+        return "{}".format(self.name)
 
     #Function to figure out the total cost with taxes
     def total_price(self):
