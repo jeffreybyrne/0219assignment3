@@ -6,8 +6,6 @@
 # add up the total cost of all products in the cart after tax
 
 import product
-macbook = product.Product("macbook",2000,5)
-water_bottle = product.Product("water bottle",3,10)
 
 class Cart:
 
@@ -26,5 +24,21 @@ class Cart:
             list_of_items += "{}\n".format(self.items[num])
         return list_of_items
 
+    def total_before_tax(self):
+        total = 0
+        for num in range(0,len(self.items)):
+            total += self.items[num].price
+        return str(total)
+
+macbook = product.Product("macbook",2000,5)
+water_bottle = product.Product("water bottle",3,10)
+pants = product.Product("pants",50,5)
+
+
 cart1 = Cart([macbook,water_bottle])
 print(cart1)
+cart1.add_item(pants)
+print(cart1)
+cart1.remove_item(macbook)
+print(cart1)
+print(cart1.total_before_tax())
