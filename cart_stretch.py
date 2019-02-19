@@ -49,20 +49,19 @@ class Cart:
                 return None
         return None
 
-
     #Method to return the sum of the base costs of each item in the cart
     def total_before_tax(self):
         total = 0
         for num in range(0,len(self.items)):
-            total += self.items[num].price
-        return str(total)
+            total += (self.items[num]['product'].price * self.items[num]['quantity'])
+        return float(total)
 
     #Method to return the sum of the total costs of each item in the cart with taxes applied
     def total_after_tax(self):
         total = 0
         for num in range(0,len(self.items)):
-            total += self.items[num].total_price()
-        return str(total)
+            total += (self.items[num]['product'].total_price() * self.items[num]['quantity'])
+        return float(total)
 
     #Stretch goal 1: Add the ability to find the most expensive product in a cart.
     def most_expensive_item(self):
@@ -70,18 +69,18 @@ class Cart:
         if self.items == []:
             return "The cart is empty"
         #Otherwise, the first item is our starting highest price
-        curr_item = self.items[0]
+        curr_item = self.items[0]['product']
         #If that's the only item, clearly it's the most expensive so return it
         if len(self.items) == 1:
             return curr_item
         else:
             #Otherwise, loop through the remaining items and for each one compare it's price to the currently most expensive
             for num in range(1,len(self.items)):
-                if self.items[num].price > curr_item.price:
-                    curr_item = self.items[num]
+                if self.items[num]['product'].price > curr_item.price:
+                    curr_item = self.items[num]['product']
             return curr_item
 
-macbook = product.Product("macbook",2000,5)
+macbook = product.Product("MacBook",2000,5)
 water_bottle = product.Product("water bottle",3,10)
 pants = product.Product("pants",50,5)
 
@@ -92,17 +91,21 @@ cart1 = Cart([
   {'product': water_bottle, 'quantity': 1},
 ])
 print(cart1)
+print("Add two pairs of pants")
 cart1.add_item(pants,2)
 print(cart1)
+print("Remove one macbook")
 cart1.remove_item(macbook,1)
 print(cart1)
+print("Remove two more macbooks")
 cart1.remove_item(macbook,2)
 print(cart1)
+print("Add one macbook back")
 cart1.add_item(macbook,1)
 print(cart1)
-# print(cart1.total_before_tax())
-# print(cart1.total_after_tax())
-# print(cart1.most_expensive_item())
+print("The total before tax is ${:.2f}.".format(cart1.total_before_tax()))
+print("The total with taxes is ${:.2f}.".format(cart1.total_after_tax()))
+print("The most expensive item in the cart is {}.".format(cart1.most_expensive_item()))
 # cart1.remove_item(pants)
 # print(cart1.most_expensive_item())
 # cart1.remove_item(water_bottle)
