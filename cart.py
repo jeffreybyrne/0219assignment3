@@ -30,6 +30,12 @@ class Cart:
             total += self.items[num].price
         return str(total)
 
+    def total_after_tax(self):
+        total = 0
+        for num in range(0,len(self.items)):
+            total += self.items[num].total_price()
+        return str(total)
+
 macbook = product.Product("macbook",2000,5)
 water_bottle = product.Product("water bottle",3,10)
 pants = product.Product("pants",50,5)
@@ -42,3 +48,4 @@ print(cart1)
 cart1.remove_item(macbook)
 print(cart1)
 print(cart1.total_before_tax())
+print(cart1.total_after_tax())
