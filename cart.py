@@ -45,16 +45,38 @@ class Cart:
             total += self.items[num].total_price()
         return str(total)
 
-# macbook = product.Product("macbook",2000,5)
-# water_bottle = product.Product("water bottle",3,10)
-# pants = product.Product("pants",50,5)
-#
-#
-# cart1 = Cart([macbook,water_bottle])
-# print(cart1)
-# cart1.add_item(pants)
-# print(cart1)
-# cart1.remove_item(macbook)
-# print(cart1)
-# print(cart1.total_before_tax())
-# print(cart1.total_after_tax())
+    #Stretch goal 1: Add the ability to find the most expensive product in a cart.
+    def most_expensive_item(self):
+        #First, check to see if there's anything in the cart. If it's an empty list, tell the user
+        if self.items == []:
+            return "The cart is empty"
+        #Otherwise, the first item is our starting highest price
+        curr_item = self.items[0]
+        #If that's the only item, clearly it's the most expensive so return it
+        if len(self.items) == 1:
+            return curr_item
+        else:
+            #Otherwise, loop through the remaining items and for each one compare it's price to the currently most expensive
+            for num in range(1,len(self.items)):
+                if self.items[num].price > curr_item.price:
+                    curr_item = self.items[num]
+            return curr_item
+
+macbook = product.Product("macbook",2000,5)
+water_bottle = product.Product("water bottle",3,10)
+pants = product.Product("pants",50,5)
+
+
+cart1 = Cart([macbook,water_bottle])
+print(cart1)
+cart1.add_item(pants)
+print(cart1)
+cart1.remove_item(macbook)
+print(cart1)
+print(cart1.total_before_tax())
+print(cart1.total_after_tax())
+print(cart1.most_expensive_item())
+cart1.remove_item(pants)
+print(cart1.most_expensive_item())
+cart1.remove_item(water_bottle)
+print(cart1.most_expensive_item())
